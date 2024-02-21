@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "sentiment-web"
+version = "0.1.0"
+description = ""
+authors = ["jihoahn9303 <rediate03@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.109.2"
+sqlalchemy = "^2.0.27"
+sqlacodegen-v2 = "^0.1.4"
+python-dotenv = "^1.0.1"
+pymysql = "^1.1.0"
+aiomysql = "^0.2.0"
+uvicorn = "^0.27.1"
+mlflow = "^2.10.2"
+pandas = "^2.2.0"
+numpy = "^1.26.4"
+pydantic = "^2.6.1"
+google-cloud-storage = "^2.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
