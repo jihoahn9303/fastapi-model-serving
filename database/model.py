@@ -3,7 +3,6 @@ from typing import List, Optional
 from sqlalchemy import (
     BigInteger, 
     CheckConstraint, 
-    Column, 
     Double, 
     ForeignKeyConstraint, 
     Index, 
