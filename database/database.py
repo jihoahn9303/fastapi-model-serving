@@ -8,10 +8,10 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.exc import SQLAlchemyError
 
 
-load_dotenv(dotenv_path='/code/app/.env')
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(dotenv_path=os.path.join(BASEDIR, '.env'))
 
-
-MYSQL_DATABASE_URL = os.environ["MYSQL_DATABASE_URL"]
+MYSQL_DATABASE_URL = os.getenv("MYSQL_DATABASE_URL")
 
 engine = create_async_engine(url=MYSQL_DATABASE_URL)
 async_session = async_sessionmaker(bind=engine)

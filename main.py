@@ -8,8 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
 
-from database import get_db
-from database import Metrics, ModelVersions
+from database import get_db, Metrics, ModelVersions
 
 
 ML_MODELS = {}
