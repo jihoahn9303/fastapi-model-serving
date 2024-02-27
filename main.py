@@ -12,7 +12,8 @@ from mlflow.pyfunc import load_model
 from dotenv import load_dotenv
 print('find dot env: ', load_dotenv(override=True))
 
-from database import Metrics, ModelVersions, get_db
+from database.database_setting import get_db
+from database.model import Metrics, ModelVersions
 
 
 ML_MODELS = {}
