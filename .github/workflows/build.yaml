@@ -42,7 +42,7 @@ jobs:
       - name: Build Docker image
         run: >
           docker build -t asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app 
-          -f ../../Dockerfile 
+          --file ./Dockerfile 
       - name: Push Docker image
         run: docker push asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
 
