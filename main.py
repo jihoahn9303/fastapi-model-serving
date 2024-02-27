@@ -2,12 +2,13 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 import pandas as pd
-from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
+from dotenv import load_dotenv
+load_dotenv(dotenv_path='./.env')
 
 from database import Metrics, ModelVersions, get_db
 
@@ -34,8 +35,6 @@ async def get_model_url(db: AsyncSession) -> str:
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    load_dotenv(dotenv_path=find_dotenv())
-    
     # Get Database session
     db_gen: AsyncGenerator[AsyncSession] = get_db()
     db: AsyncSession = await db_gen.__anext__()
