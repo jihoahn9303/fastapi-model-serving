@@ -3,8 +3,6 @@ from typing import AsyncGenerator
 
 import pandas as pd
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(dotenv_path='./.env')
-
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -36,6 +34,8 @@ async def get_model_url(db: AsyncSession) -> str:
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    load_dotenv(dotenv_path=find_dotenv())
+    
     # Get Database session
     db_gen: AsyncGenerator[AsyncSession] = get_db()
     db: AsyncSession = await db_gen.__anext__()
