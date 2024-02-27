@@ -7,7 +7,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt 
 
 COPY ./database/ ./main.py /code/app
-COPY .env /code
+COPY ./.env /code
 
 WORKDIR /code
 
