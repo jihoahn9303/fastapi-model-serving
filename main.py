@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
 from dotenv import load_dotenv, find_dotenv
+print('find dot env: ', load_dotenv(dotenv_path='./.'))
 
 from database import Metrics, ModelVersions, get_db
 
@@ -36,7 +37,6 @@ async def get_model_url(db: AsyncSession) -> str:
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print('find dot env: ', load_dotenv(dotenv_path=find_dotenv()))
     MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
     
     # Get Database session

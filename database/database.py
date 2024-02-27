@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.exc import SQLAlchemyError
 
 
-async def get_db(db_url):
+async def get_db(db_url: str):
     engine = create_async_engine(url=db_url)
     async_session = async_sessionmaker(bind=engine)
     
