@@ -8,7 +8,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
 
-from database import get_db, Metrics, ModelVersions
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(dotenv_path=find_dotenv(filename=".env"))
+
+from database import Metrics, ModelVersions, get_db
 
 
 ML_MODELS = {}

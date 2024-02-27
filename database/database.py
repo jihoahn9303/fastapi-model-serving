@@ -1,15 +1,12 @@
 import os
 import json
 
-from dotenv import load_dotenv, find_dotenv
 from sqlalchemy.ext.asyncio import (
     create_async_engine, 
     async_sessionmaker
 )
 from sqlalchemy.exc import SQLAlchemyError
 
-
-load_dotenv(dotenv_path=find_dotenv(filename=".env"))
 
 MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
 
