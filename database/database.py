@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.exc import SQLAlchemyError
 
 
-load_dotenv()
+load_dotenv(dotenv_path='/code/app/.env')
 
 
 MYSQL_DATABASE_URL = os.environ["MYSQL_DATABASE_URL"]

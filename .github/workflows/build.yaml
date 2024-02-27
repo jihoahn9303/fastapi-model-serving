@@ -1,0 +1,64 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  login-docker:
+    runs-on: self-hosted
+    steps:
+      - name: Import JSON key
+        run: echo ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} | cat > ./key.json
+      - name: Login to docker
+        run: cat ./key.json | docker login -u _json_key --password-stdin asia-northeast3-docker.pkg.dev
+
+  setup-argocd:
+    runs-on: self-hosted
+    steps:
+      - name: Install ArgoCD CLI
+        run: |
+          curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+          rm argocd-linux-amd64
+      - name: Login to ArgoCD server
+        run: >
+          argocd login ${{ secrets.ARGOCD_IP }} 
+          --username ${{ secrets.ARGOCD_ID }} 
+          --password ${{ secrets.ARGOCD_PW }} 
+          --insecure
+  
+  push-docker-image:
+    needs: login-docker
+    runs-on: self-hosted
+    steps:
+      - name: Build Docker image
+        run: docker build . -t asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
+      - name: Push Docker image
+        run: docker push asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
+
+  deploy-app:
+    needs: [push-docker-image, setup-argocd]
+    runs-on: self-hosted
+    steps:
+      - name: Create Kubernetes application
+        run: >
+          argocd app create ${{ github.event.repository.name }}
+          --repo asia-northeast3-docker.pkg.dev
+          --helm-chart e2eml-jiho/sentiment-helm/sentiment-helm
+          --helm-set image.name=asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
+          --revision 0.0.1
+          --dest-server https://kubernetes.default.svc
+          --dest-namespace sentiment-api
+          --upsert
+      - name: Synchronize application
+        run: |
+          argocd app get ${{ github.event.repository.name }} --hard-refresh
+          argocd app sync ${{ github.event.repository.name }}
+          argocd app actions run ${{ github.event.repository.name }} restart --kind Deployment
+
+
+  
+
+  
+  
