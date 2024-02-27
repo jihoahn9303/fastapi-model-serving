@@ -9,8 +9,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
-from dotenv import load_dotenv, find_dotenv
-print('find dot env: ', load_dotenv(dotenv_path=find_dotenv()))
+from dotenv import load_dotenv
+print('find dot env: ', load_dotenv(override=True))
 
 from database import Metrics, ModelVersions, get_db
 
