@@ -8,13 +8,12 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.exc import SQLAlchemyError
 
 
-MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
-
-engine = create_async_engine(url=MYSQL_DATABASE_URL)
-async_session = async_sessionmaker(bind=engine)
-
-
 async def get_db():
+    MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
+
+    engine = create_async_engine(url=MYSQL_DATABASE_URL)
+    async_session = async_sessionmaker(bind=engine)
+    
     async with async_session() as async_db:
         try:
             yield async_db

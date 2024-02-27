@@ -2,14 +2,14 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 import pandas as pd
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(dotenv_path='./.env')
+
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(dotenv_path=find_dotenv(filename=".env"))
 
 from database import Metrics, ModelVersions, get_db
 
