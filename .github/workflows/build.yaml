@@ -7,25 +7,31 @@ on:
 jobs:
   login-docker:
     runs-on: self-hosted
+    env:
+      GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
     steps:
       - name: Import JSON key
-        run: echo ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} | cat > ./key.json
+        run: echo $GCP_SERVICE_ACCOUNT_KEY | cat > ./key.json
       - name: Login to docker
         run: cat ./key.json | docker login -u _json_key --password-stdin asia-northeast3-docker.pkg.dev
 
   setup-argocd:
     runs-on: self-hosted
+    env:
+      ARGOCD_IP: ${{ secrets.ARGOCD_IP }} 
+      ARGOCD_ID: ${{ secrets.ARGOCD_ID }}
+      ARGOCD_PW: ${{ secrets.ARGOCD_PW }}
     steps:
       - name: Install ArgoCD CLI
         run: |
           curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+          sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
           rm argocd-linux-amd64
       - name: Login to ArgoCD server
         run: >
-          argocd login ${{ secrets.ARGOCD_IP }} 
-          --username ${{ secrets.ARGOCD_ID }} 
-          --password ${{ secrets.ARGOCD_PW }} 
+          argocd login $ARGOCD_IP 
+          --username $ARGOCD_ID
+          --password $ARGOCD_PW
           --insecure
   
   push-docker-image:
