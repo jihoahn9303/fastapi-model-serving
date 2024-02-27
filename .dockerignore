@@ -1,9 +1,7 @@
-.dockerignore
 __pychache__/
 poetry.lock
 pyproject.toml
 README.md
-requirements.txt
 .env-example
 ./src/*
 ./chart/*
