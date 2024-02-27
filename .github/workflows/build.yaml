@@ -41,7 +41,7 @@ jobs:
     needs: [push-docker-image, setup-argocd]
     runs-on: self-hosted
     steps:
-      - name: Create Kubernetes application
+      - name: Create Kubernetes application into ArgoCD
         run: >
           argocd app create ${{ github.event.repository.name }}
           --repo asia-northeast3-docker.pkg.dev

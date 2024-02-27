@@ -31,7 +31,6 @@ async def get_model_url(db: AsyncSession) -> str:
     
     return model_url
 
-
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
