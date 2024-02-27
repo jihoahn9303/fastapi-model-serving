@@ -1,3 +1,5 @@
+import os
+import json
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -35,8 +37,10 @@ async def get_model_url(db: AsyncSession) -> str:
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
+    
     # Get Database session
-    db_gen: AsyncGenerator[AsyncSession] = get_db()
+    db_gen: AsyncGenerator[AsyncSession] = get_db(db_url=MYSQL_DATABASE_URL)
     db: AsyncSession = await db_gen.__anext__()
     
     # Get model URL in Google Cloud Storage
