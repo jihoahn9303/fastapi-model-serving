@@ -19,7 +19,7 @@ def get_database_url() -> str:
     mysql_database_name = os.getenv("MYSQL_DATABASE_NAME")
     
     database_urls = [
-        "mysql+aiomysql//", 
+        "mysql+aiomysql://", 
         mysql_user, 
         mysql_password, 
         mysql_host,
