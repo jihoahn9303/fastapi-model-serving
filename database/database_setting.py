@@ -20,10 +20,10 @@ def get_database_url() -> str:
     
     database_urls = [
         "mysql+aiomysql://", 
-        mysql_user, 
-        mysql_password, 
-        mysql_host,
-        mysql_port,
+        mysql_user, ":", 
+        mysql_password, "@",
+        mysql_host, ":",
+        mysql_port, "/",
         mysql_database_name
     ]
     
