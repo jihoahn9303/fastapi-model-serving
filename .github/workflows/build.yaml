@@ -26,7 +26,7 @@ jobs:
           --insecure
   
   push-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -45,13 +45,20 @@ jobs:
           password: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Build and push
-        uses: docker/build-push-action@v3.0.0
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          secrets: |
+            "mysql_user=${{ secrets.MYSQL_USER }}"
+            "mysql_password=${{ secrets.MYSQL_PASSWORD }}"
+            "mysql_host=${{ secrets.MYSQL_HOST }}"
+            "mysql_port=${{ secrets.MYSQL_PORT }}"
+            "mysql_database_name=${{ secrets.MYSQL_DATABASE_NAME }}"
 
   deploy-app:
     needs: [push-docker-image, setup-argocd]

@@ -1,2 +1,2 @@
-from .database import get_db
+from .database_setting import get_db
 from .model import Metrics, ModelVersions

@@ -1,8 +1,7 @@
-.dockerignore
-.gitignore
 __pychache__/
-.env-example
-.poetry.lock
-.pyproject.toml
+poetry.lock
+pyproject.toml
 README.md
+.env-example
+./chart/*
 
