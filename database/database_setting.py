@@ -12,13 +12,22 @@ from sqlalchemy.exc import SQLAlchemyError
 
 
 def get_database_url() -> str:
-    mysql_user = os.getenv("MYSQL_USER")[1:]
-    mysql_password = os.getenv("MYSQL_PASSWORD")[1:]
-    mysql_host = os.getenv("MYSQL_HOST")[1:]
-    mysql_port = os.getenv("MYSQL_PORT")[1:]
-    mysql_database_name = os.getenv("MYSQL_DATABASE_NAME")[1:]
+    mysql_user = os.getenv("MYSQL_USER")
+    mysql_password = os.getenv("MYSQL_PASSWORD")
+    mysql_host = os.getenv("MYSQL_HOST")
+    mysql_port = os.getenv("MYSQL_PORT")
+    mysql_database_name = os.getenv("MYSQL_DATABASE_NAME")
     
-    return f"mysql+aiomysql://${mysql_user}:${mysql_password}@${mysql_host}:${mysql_port}/${mysql_database_name}"
+    database_urls = [
+        "mysql+aiomysql//", 
+        mysql_user, 
+        mysql_password, 
+        mysql_host,
+        mysql_port,
+        mysql_database_name
+    ]
+    
+    return "".join(database_urls)
 
 
 async def get_db():
