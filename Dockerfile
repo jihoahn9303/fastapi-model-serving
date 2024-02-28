@@ -6,7 +6,7 @@ COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt \
     && mkdir -p /code/database \
-    && mkdir -p /code/src
+    && mkdir -p /code/src \
     && mkdir -p /code/scripts
 
 COPY database/ /code/database/
@@ -25,6 +25,6 @@ RUN chmod +x /code/scripts/create_env.sh \
     && --mount=type=secret,id=mysql_port \
         sed -i "s/MYSQL_PORT=/MYSQL_PORT=$(cat /run/secrets/mysql_port)" /code/.env \
     && --mount=type=secret,id=mysql_database_name \
-        sed -i "s/MYSQL_DATABASE_NAME=/MYSQL_DATABASE_NAME=$(cat /run/secrets/mysql_database_name)" /code/.env \
+        sed -i "s/MYSQL_DATABASE_NAME=/MYSQL_DATABASE_NAME=$(cat /run/secrets/mysql_database_name)" /code/.env
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
