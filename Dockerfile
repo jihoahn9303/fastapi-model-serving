@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt \
 
 COPY database/ /code/database/
 COPY src/ /code/src/
-COPY ./main.py ./.env /code/
+COPY .env ./main.py /code/
 COPY ./scripts/*.sh /code/scripts/
 
 RUN chmod +x /code/scripts/create_env.sh \
