@@ -45,11 +45,12 @@ jobs:
           password: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: asia-northeast3-docker.pkg.dev/e2eml-jiho/setiment-analysis/sentiment-app
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
           secrets: |
