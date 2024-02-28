@@ -21,7 +21,7 @@ RUN --mount=type=secret,id=mysql_user \
 RUN --mount=type=secret,id=mysql_password \
         sed -i "s/MYSQL_PASSWORD=/MYSQL_PASSWORD=$(cat /run/secrets/mysql_password)/" /code/.env 
 RUN --mount=type=secret,id=mysql_host \
-        sed -i "s/MYSQL_HOST=/MYSQL_HOST=$(cat /run/secrets/mysql_host)/" /code/.env \
+        sed -i "s/MYSQL_HOST=/MYSQL_HOST=$(cat /run/secrets/mysql_host)/" /code/.env
 RUN --mount=type=secret,id=mysql_port \
         sed -i "s/MYSQL_PORT=/MYSQL_PORT=$(cat /run/secrets/mysql_port)/" /code/.env 
 RUN --mount=type=secret,id=mysql_database_name \
