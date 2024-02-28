@@ -9,8 +9,6 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import FastAPI
 from mlflow.pyfunc import load_model
-from dotenv import load_dotenv
-print('find dot env: ', load_dotenv(override=True))
 
 from database.database_setting import get_db
 from database.model import Metrics, ModelVersions
@@ -38,10 +36,8 @@ async def get_model_url(db: AsyncSession) -> str:
 # Define the code that should be executed before the application starts up
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    MYSQL_DATABASE_URL = json.loads(os.getenv("MYSQL_DATABASE_URL"))["url"]
-    
     # Get Database session
-    db_gen: AsyncGenerator[AsyncSession] = get_db(db_url=MYSQL_DATABASE_URL)
+    db_gen: AsyncGenerator[AsyncSession] = get_db()
     db: AsyncSession = await db_gen.__anext__()
     
     # Get model URL in Google Cloud Storage
