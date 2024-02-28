@@ -2,9 +2,11 @@
 
 ** FastAPI 기반 Kubernetes 앱 배포를 바탕으로, GCP에 존재하는 ML 모델을 서빙하는 프로젝트입니다. **
 
-모델 학습 및 아티팩트 배포와 관련된 source는 다음 링크를 참고해주시기 바랍니다.
+모델 학습 및 아티팩트 배포와 관련된 소스 및 블로그 설명은 다음 링크를 참고해주시기 바랍니다.
 
-[MLFlow-with-GCP](https://github.com/jihoahn9303/MLflow-with-GCP)
+[Code source](https://github.com/jihoahn9303/MLflow-with-GCP)
+
+[Blog](https://anzzang-lab.oopy.io/55636845-9a23-455e-8234-8a41180615ff)
 
 
 ## Machine Learning Task
