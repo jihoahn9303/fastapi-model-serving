@@ -2,6 +2,10 @@
 
 ** FastAPI 기반 Kubernetes 앱 배포를 바탕으로, GCP에 존재하는 ML 모델을 서빙하는 프로젝트입니다. **
 
+모델 학습 및 아티팩트 배포와 관련된 source는 다음 링크를 참고해주시기 바랍니다.
+
+[MLFlow-with-GCP](https://github.com/jihoahn9303/MLflow-with-GCP)
+
 
 ## Machine Learning Task
 
@@ -14,7 +18,7 @@
 
 ## Project process
 
-![image](https://user-images.githubusercontent.com/48744746/267556159-82927a2e-dc33-4598-9ab4-181bd883040c.png)
+![serving project](https://github.com/jihoahn9303/fastapi-model-serving/assets/48744746/b8f2de3f-1e32-446b-9d6d-097a02f489dd)
 
 1. 모델 서빙에 필요한 코드를 `Github`에 push할 경우, `Github Actions`을 통해 자동으로 코드를 컨테이너로 `build`합니다.
 
