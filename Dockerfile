@@ -16,7 +16,7 @@ COPY ./scripts/*.sh /code/scripts/
 
 RUN chmod +x /code/scripts/create_env.sh \
     && /code/scripts/create_env.sh \
-    && --mount=type=secret,id=mysql_user \
+RUN --mount=type=secret,id=mysql_user \
         sed -i "s/MYSQL_USER=/MYSQL_USER=$(cat /run/secrets/mysql_user)" /code/.env \
     && --mount=type=secret,id=mysql_password \
         sed -i "s/MYSQL_PASSWORD=/MYSQL_PASSWORD=$(cat /run/secrets/mysql_password)" /code/.env \
