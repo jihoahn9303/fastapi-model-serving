@@ -1,6 +1,6 @@
 # Realtime Sentiment Classification with FastAPI
 
-** FastAPI 기반 Kubernetes 앱 배포를 바탕으로, GCP에 존재하는 ML 모델을 서빙하는 프로젝트입니다. **
+**FastAPI 기반 Kubernetes 앱 배포를 바탕으로, GCP에 존재하는 ML 모델을 서빙하는 프로젝트입니다.**
 
 모델 학습 및 아티팩트 배포와 관련된 소스 및 블로그 설명은 다음 링크를 참고해주시기 바랍니다.
 
@@ -88,5 +88,41 @@
 | IDLE                    | Visual Studio code `1.75.1`                                                           |
 | Docker                  | Docker desktop `4.26.1` / Engine version: `24.0.7`                                    |
 
+
+## Usage
+
+### Curl
+
+터미널에서 curl을 이용하여, 다음과 같이 추론 서비스를 호출할 수 있습니다.
+
+```
+curl -X 'POST' \
+  'http://34.47.86.49/inference' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "sentence": "This story is really good!"
+}'
+```
+
+### Python 
+
+Requests 라이브러리를 이용하여, 다음과 같이 추론 서비스를 호출할 수 있습니다.
+
+```
+import requests
+
+
+if __name__ == '__main__':
+    url = 'http://34.47.86.49/inference'
+    result = requests.post(
+        url=url, 
+        json={
+            "sentence": "This story is really good!"
+        }
+    )
+
+    print(result.text)
+```
 
 
