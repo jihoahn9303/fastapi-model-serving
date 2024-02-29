@@ -28,11 +28,11 @@
 
 3. `Github Actions`의 워크플로우에 의하여, 컨테이너는 `GCP Kubernetes`에 Kubernetes 애플리케이션 형태로 배포됩니다.
 
-4. ArgoCD Server를 통해 Kubernetes 애플리케이션에 대한 `Health check`를 자동으로 수행합니다.
+4. ArgoCD Server를 통해 Kubernetes 애플리케이션에 대한 `Health check`를 자동으로 수행합니다. (이때, ArgoCD 서버는 GCP Kubernetes 클러스터에서 미리 설치한 상태입니다)
 
-5. `Health check`가 완료된 애플리케이션은 `GCP Cloud SQL`에 쿼리를 수행하여, 성능이 가장 좋은 모델 URL을 가져옵니다.
+5. `Health check`가 완료된 애플리케이션은 `GCP Cloud SQL`에 쿼리를 수행하여, 성능이 가장 좋은 모델의 URL을 가져옵니다.
 
-6. `GCP Cloud Storage`에서 URL에 대응하는 모델을 가져옵니다.
+6. 애플리케이션은 `GCP Cloud Storage`에서 URL에 대응하는 모델을 가져옵니다. (FastAPI Lifespan Event)
 
 7. FastAPI 웹 애플리케이션은 가져온 모델을 통해, 추론(inference)을 수행할 준비를 마칩니다.
 
