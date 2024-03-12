@@ -19,6 +19,7 @@ pandas = "^2.2.0"
 numpy = "^1.26.4"
 pydantic = "^2.6.1"
 google-cloud-storage = "^2.14.0"
+locust = "^2.24.0"
 
 
 [build-system]
