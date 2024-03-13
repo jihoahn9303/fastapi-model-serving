@@ -8,6 +8,12 @@
 
 [Blog](https://anzzang-lab.oopy.io/55636845-9a23-455e-8234-8a41180615ff)
 
+감성 분석 모델: Scikit-learn의 Logistic Regression
+
+성능: 0.897(F1-score)
+
+**성과: 동시 접속자가 300명인 환경에서, 평균 모델 추론 시간이 28ms인 FastAPI 웹 서버 구축**
+
 
 ## Machine Learning Task
 
